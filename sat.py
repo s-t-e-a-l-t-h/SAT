@@ -5,6 +5,10 @@
 import Plot as Plt
 import numpy as np
 
+# constants
+
+# round to
+PRECISION = 10
 
 def projection(v, t):
     t, v = np.array(t), np.array(v)
@@ -39,8 +43,10 @@ def separating_axis_theorem(tri1, tri2):
         projection_t1_newx, projection_t2_newx = list(zip(*projection_t1))[0], list(zip(*projection_t2))[0]
 
         # maximal length projected of each triangle
-        projection_edge1, projection_edge2 = [min(projection_t1_newx), max(projection_t1_newx)], \
-                                             [min(projection_t2_newx), max(projection_t2_newx)]
+        projection_edge1, projection_edge2 = [round(min(projection_t1_newx), PRECISION),
+                                              round(max(projection_t1_newx), PRECISION)], \
+                                             [round(min(projection_t2_newx), PRECISION),
+                                              round(max(projection_t2_newx), PRECISION)]
 
         projection_edge = [projection_edge1, projection_edge2]
         projection_edge.sort(key=lambda x: x[0])
@@ -153,3 +159,18 @@ def intersection(t1, t2):
 #         faces[i][j].append(0.0)
 # Plt.plot_3d(faces=[faces], faces_view=True, normals_view=False, points_view=False, face_color=[["r", "g"]],
 #             face_alpha=0.5, azim=-90, elev=90)
+
+
+faces = [[[-0.4760028, 0.37223806],
+          [-0.33617698, 0.04619783],
+          [-0.19737227, 0.31664461]],
+         [[0., 0.],
+          [-0.33617698, 0.04619783],
+          [-0.19737227, 0.31664461]]]
+
+print(intersection(faces[0], faces[1]))
+for i in range(0, 2):
+    for j in range(0, 3):
+        faces[i][j].append(0.0)
+Plt.plot_3d(faces=[faces], faces_view=True, normals_view=False, points_view=False, face_color=[["r", "g"]],
+            face_alpha=0.5, azim=-90, elev=90)
