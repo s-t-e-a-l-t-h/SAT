@@ -88,6 +88,7 @@ def plot_3d(faces=None, normals=None, vertices=None, edge_color="k",
                 tri.set_facecolor(fce_color)
                 ax.add_collection3d(tri)
                 idx_inner += 1
+            idx_outer += 1
         axis_range = figure_axis_range(arr=faces)
 
     # points ploting
