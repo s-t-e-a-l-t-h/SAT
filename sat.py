@@ -25,9 +25,9 @@ def to_tangential(tn, nn, pt):
 def separating_axis_theorem(tri1, tri2):
     # each edge of face tri1 and tri2
     # number of face vertices
-    nfv = len(tri1)
+    nfv1, nfv2 = len(tri1), len(tri2)
     edges = np.array(
-        [[tri1[i], tri1[i + 1]] for i in range(-1, nfv - 1)] + [[tri2[i], tri2[i + 1]] for i in range(-1, nfv - 1)])
+        [[tri1[i], tri1[i + 1]] for i in range(-1, nfv1 - 1)] + [[tri2[i], tri2[i + 1]] for i in range(-1, nfv2 - 1)])
 
     for edge in edges:
         # tangent vector of testing line
@@ -196,5 +196,21 @@ def intersection(t1, t2):
 #         faces[i][j].append(0.0)
 # Plt.plot_3d(faces=[faces], faces_view=True, normals_view=False, points_view=False, face_color=[["r", "g"]],
 #             face_alpha=0.5, azim=-90, elev=90)
+
+# 4 dim faces:
+faces = [[[0.0, 0.5],
+          [1.0, 0.5],
+          [1.0, 1.0],
+          [0.0, 1.0]],
+         [[0.5, 0.5],
+          [4.0, 0.5],
+          [4.0, 3.0]]]
+print(intersection(faces[0], faces[1]))
+for i in range(0, 2):
+    for j in range(0, len(faces[i])):
+        faces[i][j].append(0.0)
+
+Plt.plot_3d(faces=[faces], faces_view=True, normals_view=False, points_view=False, face_color=[["r", "g"]],
+            face_alpha=0.5, azim=-90, elev=90)
 
 
